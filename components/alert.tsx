@@ -1,7 +1,12 @@
 import styles from "./alert.module.css";
 import cn from "classnames";
 
-export default function Alert({ children, type }) {
+type Props = {
+  children: HTMLElement;
+  type: string;
+};
+
+export default function Alert({ children, type }: Props) {
   return (
     <div
       className={cn({

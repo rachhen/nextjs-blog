@@ -1,11 +1,22 @@
 import Head from "next/head";
-import Link from "next/link";
-import Date from "../components/date";
 import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../lib/posts";
+import Link from "next/link";
+import Date from "../components/date";
+import { GetStaticProps } from "next";
 
-export default function Home({ allPostsData }) {
+interface Post {
+  id: string;
+  title: string;
+  date: string;
+}
+
+type Props = {
+  allPostsData: Post[];
+};
+
+export default function Home({ allPostsData }: Props) {
   return (
     <Layout home>
       <Head>
@@ -13,15 +24,12 @@ export default function Home({ allPostsData }) {
       </Head>
       <section className={utilStyles.headingMd}>
         <p>
-          Eiusmod esse voluptate deserunt nisi laboris Lorem aute in pariatur in
-          sint id. Do laboris cupidatat mollit labore do cupidatat reprehenderit
-          laboris excepteur ut sunt exercitation eu cillum. Tempor velit duis
-          duis non voluptate aliquip officia ipsum non voluptate voluptate anim.
-          Cupidatat reprehenderit veniam deserunt aliquip do. Nisi sint
-          incididunt amet laborum.
+          Incididunt cupidatat commodo adipisicing enim qui consectetur Lorem
+          non. Et ex consectetur mollit ut qui amet eu ex mollit ut. Sit sunt
+          aliqua exercitation anim duis nostrud ad anim duis pariatur non et.
         </p>
         <p>
-          (This is a sample website - you’ll be building a site like this on{" "}
+          (This is a sample website - you’ll be building a site like this in{" "}
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
         </p>
       </section>
@@ -45,11 +53,11 @@ export default function Home({ allPostsData }) {
   );
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
   return {
     props: {
       allPostsData,
     },
   };
-}
+};
